@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - Le Grand Large</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Importation des polices Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #FAF8F5; /* Couleur papier/sable très clair */
-            --text-color: #3E362E; /* Marron très foncé, presque noir */
-            --accent-color: #9C7A3C; /* Doré/Bronze pour les titres */
-            --font-title: 'Cinzel', serif; /* Police classique et élégante proche du PDF */
+            --bg-color: #FCFBF9; /* Blanc très légèrement cassé/chaud */
+            --text-color: #2C2C2C; /* Gris anthracite profond */
+            --accent-color: #A67C00; /* Bronze/Doré inspiré du logo et du sceau */
+            --font-title: 'Playfair Display', serif;
             --font-text: 'Lato', sans-serif;
-            --font-signature: 'Great Vibes', cursive;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -24,221 +28,365 @@
             font-family: var(--font-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+            background-size: 40px 40px; /* Léger motif de fond chic */
         }
 
-        /* PAGE DE GARDE (Couverture Aquarelle) */
-        .cover-page {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--accent-color);
-            margin-bottom: 30px;
-        }
-
-        .cover-page img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* GESTION MULTILINGUE */
+        /* -------------------------------------------
+           GESTION MULTILINGUE
+        ------------------------------------------- */
         .lang-section {
             display: none;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px 30px 60px;
-            background-color: #FFFFFF;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            padding: 40px 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            min-height: 100vh;
         }
 
-        .lang-section.active { display: block; }
+        .lang-section.active {
+            display: block;
+        }
 
-        /* LOGO DU MENU */
-        .menu-logo-container {
+        /* -------------------------------------------
+           DESIGN & ANIMATIONS
+        ------------------------------------------- */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Délais d'apparition pour un effet fluide */
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .menu-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        .menu-logo-container img {
-            max-width: 180px;
-            height: auto;
+        .restaurant-name {
+            font-family: var(--font-title);
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
         }
 
-        /* TYPOGRAPHIE DES PLATS */
-        .category-block { margin-bottom: 50px; }
+        .restaurant-subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .category-block {
+            margin-bottom: 45px;
+        }
 
         .category-title {
             font-family: var(--font-title);
             color: var(--accent-color);
-            font-size: 1.6rem;
+            font-size: 1.8rem;
+            text-transform: uppercase;
             text-align: center;
-            letter-spacing: 3px;
-            margin-bottom: 35px;
+            letter-spacing: 2px;
+            margin: 0 0 30px;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
         }
 
         .menu-item {
-            margin-bottom: 25px;
-            text-align: center; /* Centré comme dans beaucoup de menus classiques */
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .item-details {
+            flex: 1;
+            padding-right: 15px;
         }
 
         .item-name {
             font-family: var(--font-title);
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.15rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-color);
         }
 
         .item-desc {
-            font-size: 0.95rem;
-            color: #666;
+            font-size: 0.9rem;
+            color: #555;
+            margin-top: 4px;
             font-style: italic;
-            margin: 5px 0;
+        }
+
+        .item-dots {
+            flex-grow: 1;
+            border-bottom: 2px dotted #d3d3d3;
+            margin: 0 15px;
+            position: relative;
+            top: -6px;
         }
 
         .item-price {
-            font-family: var(--font-text);
-            font-weight: 700;
-            color: var(--accent-color);
-            font-size: 1.1rem;
-        }
-
-        /* PIED DE PAGE & SIGNATURE */
-        .menu-footer {
-            text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #EAEAEA;
-        }
-
-        .signature-container img {
-            max-width: 200px;
-            margin: 20px auto;
-        }
-
-        .footer-quote {
             font-family: var(--font-title);
-            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
             color: #888;
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
 <body>
-
-    <!-- Couverture (Aquarelle) visible pour toutes les langues -->
-    <div class="cover-page">
-        <!-- L'image de l'aquarelle avec le pélican doit s'appeler couverture.jpg sur ton GitHub -->
-        <img src="couverture.jpg" alt="Le Grand Large - Escale Gastronomique">
-    </div>
 
     <!-- ========================================== -->
     <!-- MENU FRANÇAIS (Par défaut)                 -->
     <!-- ========================================== -->
     <div id="menu-fr" class="lang-section">
         
-        <div class="menu-logo-container">
-            <!-- Le logo au trait doit s'appeler logo-pelican.png sur ton GitHub -->
-            <img src="logo-pelican.png" alt="Logo Le Grand Large">
+        <div class="menu-header fade-in-up">
+            <h1 class="restaurant-name">Le Grand Large</h1>
+            <div class="restaurant-subtitle">Escale Gastronomique</div>
         </div>
 
-        <div class="category-block">
+        <div class="category-block fade-in-up delay-1">
             <h2 class="category-title">Les Classiques</h2>
             
             <div class="menu-item">
-                <div class="item-name">Saumon Fumé à la Ficelle (Écosse)</div>
-                <div class="item-desc">Tranches de saumon fumé, blinis et toasts, crème fouettée citron-aneth</div>
+                <div class="item-details">
+                    <div class="item-name">Saumon Fumé à la Ficelle (Écosse)</div>
+                    <div class="item-desc">Tranches de saumon fumé, blinis et toasts, crème fouettée citron-aneth</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">22.000</div>
             </div>
 
             <div class="menu-item">
-                <div class="item-name">Terrine de Foie Gras Maison</div>
-                <div class="item-desc">Servie avec ses toasts et sa confiture d'oignons</div>
+                <div class="item-details">
+                    <div class="item-name">Terrine de Foie Gras Maison</div>
+                    <div class="item-desc">Servie avec ses toasts et sa confiture d'oignons</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">24.000</div>
             </div>
         </div>
 
-        <div class="category-block">
+        <div class="category-block fade-in-up delay-2">
             <h2 class="category-title">Poissons & Crustacés</h2>
             
             <div class="menu-item">
-                <div class="item-name">Le Mérou, Ma Façon</div>
-                <div class="item-desc">Mérou croustillant sur crème citronnée aux champignons</div>
+                <div class="item-details">
+                    <div class="item-name">Le Mérou, Ma Façon</div>
+                    <div class="item-desc">Mérou croustillant sur crème citronnée aux champignons</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">24.500</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Thon Rossini "Signature du Chef"</div>
+                    <div class="item-desc">Délicatement surmonté d'une tranche de foie gras et nappé de sauce Rossini</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">34.500</div>
             </div>
         </div>
 
-        <div class="menu-footer">
-            <div class="footer-quote">
-                PARCE QUE LA CUISINE EST AVANT TOUT UNE ÉMOTION,<br>
-                NOUS ESPÉRONS QUE CE VOYAGE CULINAIRE VOUS LAISSERA UN SOUVENIR<br>
-                AUSSI PRÉCIEUX QUE LE PLAISIR QUE NOUS AVONS EU À LE CRÉER.
+        <div class="category-block fade-in-up delay-3">
+            <h2 class="category-title">Viandes</h2>
+            
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Filet de Boeuf de Galice "Rossini"</div>
+                    <div class="item-desc">Escalope de foie gras poêlée sur toast brioché avec sauce délicate au foie gras</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">39.500</div>
             </div>
-            <div class="signature-container">
-                <!-- Le sceau et la signature doivent s'appeler sceau-signature.png sur ton GitHub -->
-                <img src="sceau-signature.png" alt="Quality for 22 Years - Jérôme">
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Magret de Canard Fermier IGP Sud-Ouest</div>
+                    <div class="item-desc">Grillé aux échalotes, au poivre noir flambé au cognac, ou au miel</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">34.500</div>
             </div>
         </div>
+
+        <div class="category-block fade-in-up delay-4">
+            <h2 class="category-title">Nos Desserts Maison</h2>
+            
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Mousse au Chocolat Trésor de Côte d'Ivoire</div>
+                    <div class="item-desc">Mousse au chocolat 70% cacao de Côte d'Ivoire, sans sucre ajouté (Sans Gluten)</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">9.500</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Le Fondant</div>
+                    <div class="item-desc">La "création" et son cœur coulant de chocolat noir, glace vanille</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">11.000</div>
+            </div>
+        </div>
+
+        <div class="footer-note fade-in-up delay-4">
+            Prix nets en Francs CFA, taxes et service compris.<br>
+            Parce que la cuisine est avant tout une émotion, nous espérons que ce voyage culinaire vous laissera un souvenir précieux.
+        </div>
     </div>
+
 
     <!-- ========================================== -->
     <!-- MENU ANGLAIS (Détecté automatiquement)     -->
     <!-- ========================================== -->
     <div id="menu-en" class="lang-section">
         
-        <div class="menu-logo-container">
-            <img src="logo-pelican.png" alt="Logo Le Grand Large">
+        <div class="menu-header fade-in-up">
+            <h1 class="restaurant-name">Le Grand Large</h1>
+            <div class="restaurant-subtitle">Gastronomic Stopover</div>
         </div>
 
-        <div class="category-block">
+        <div class="category-block fade-in-up delay-1">
             <h2 class="category-title">The Classics</h2>
             
             <div class="menu-item">
-                <div class="item-name">String-Smoked Salmon (Scotland)</div>
-                <div class="item-desc">Slices of smoked salmon, blinis and toast, lemon-dill whipped cream</div>
+                <div class="item-details">
+                    <div class="item-name">String-Smoked Salmon (Scotland)</div>
+                    <div class="item-desc">Slices of smoked salmon, blinis and toast, lemon-dill whipped cream</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">22.000</div>
             </div>
 
             <div class="menu-item">
-                <div class="item-name">Homemade Foie Gras Terrine</div>
-                <div class="item-desc">Served with toast and onion jam</div>
+                <div class="item-details">
+                    <div class="item-name">Homemade Foie Gras Terrine</div>
+                    <div class="item-desc">Served with toast and onion jam</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">24.000</div>
             </div>
         </div>
 
-        <div class="category-block">
+        <div class="category-block fade-in-up delay-2">
             <h2 class="category-title">Fish & Shellfish</h2>
             
             <div class="menu-item">
-                <div class="item-name">Grouper, My Way</div>
-                <div class="item-desc">Crispy Grouper on lemon cream with mushrooms (For Over 22 Years)</div>
+                <div class="item-details">
+                    <div class="item-name">Grouper, My Way</div>
+                    <div class="item-desc">Crispy Grouper on lemon cream with mushrooms (For Over 22 Years)</div>
+                </div>
+                <div class="item-dots"></div>
                 <div class="item-price">24.500</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Rossini Tuna "The Chef's Signature Dish"</div>
+                    <div class="item-desc">Delicately topped with a slice of foie gras and coated in Rossini sauce</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">34.500</div>
             </div>
         </div>
 
-        <div class="menu-footer">
-            <div class="footer-quote">
-                BECAUSE COOKING IS ABOVE ALL AN EMOTION,<br>
-                WE HOPE THIS CULINARY JOURNEY WILL LEAVE YOU WITH A MEMORY<br>
-                AS PRECIOUS AS THE PLEASURE WE HAD CREATING IT.
+        <div class="category-block fade-in-up delay-3">
+            <h2 class="category-title">Meats</h2>
+            
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Galician Beef Fillet "Rossini"</div>
+                    <div class="item-desc">Pan-seared foie gras escalope on brioche toast with delicate foie gras sauce</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">39.500</div>
             </div>
-            <div class="signature-container">
-                <img src="sceau-signature.png" alt="Quality for 22 Years - Jérôme">
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Farm-Raised Duck Breast South-West PGI</div>
+                    <div class="item-desc">Grilled with shallots, with black pepper flambéed with cognac, or with honey</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">34.500</div>
             </div>
+        </div>
+
+        <div class="category-block fade-in-up delay-4">
+            <h2 class="category-title">Our Homemade Desserts</h2>
+            
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">Ivory Coast Treasure Chocolate Mousse</div>
+                    <div class="item-desc">70% cocoa chocolate mousse from Côte d'Ivoire, with no added sugar (Gluten-Free)</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">9.500</div>
+            </div>
+
+            <div class="menu-item">
+                <div class="item-details">
+                    <div class="item-name">The Fondant</div>
+                    <div class="item-desc">The "creation" and its flowing heart of dark chocolate, vanilla ice cream</div>
+                </div>
+                <div class="item-dots"></div>
+                <div class="item-price">11.000</div>
+            </div>
+        </div>
+
+        <div class="footer-note fade-in-up delay-4">
+            Prices are net in CFA francs, inclusive of tax and service.<br>
+            Because cooking is above all an emotion, we hope this culinary journey will leave you with a precious memory.
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- SCRIPT DE DÉTECTION DE LANGUE -->
+    <!-- ========================================== -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const userLangFull = navigator.language || navigator.userLanguage;
             const baseLang = userLangFull.substring(0, 2).toLowerCase();
+            
             const supportedLangs = ['fr', 'en'];
-            const finalLang = supportedLangs.includes(baseLang) ? baseLang : 'fr';
+            const defaultLang = 'fr';
+            const finalLang = supportedLangs.includes(baseLang) ? baseLang : defaultLang;
             
             const activeSection = document.getElementById(`menu-${finalLang}`);
             if (activeSection) {
